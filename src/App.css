@@ -5,17 +5,23 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  border-radius:50%;
+  width:50px;
+  height:50px; 
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #fff;
+  min-height: 50px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  /* justify-content: space-between; */
   font-size: calc(10px + 2vmin);
   color: white;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.3);
+  padding: 0 5px;
+  gap:5px;
 }
 
 .App-link {
@@ -28,4 +34,97 @@
 
 .small {
   font-size: 0.75rem;
+}
+.mainbox{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  list-style: none;
+  row-gap: 2px;
+}
+.innerbox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap:5px;
+}
+/* src/styles.css */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #3ca2da;
+  color: #fff;
+ 
+  /* background-color: #f2f2f2; */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+.tabs {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.tabs button{
+  background: #3ca2da;
+  border: 2px solid transparent;
+  padding: 5px;
+  color: #fff;
+  border-radius: 3px;
+}
+.tabs button.active {
+  background-color: #007bff;
+  color: white;
+}
+.DataTable{
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+}
+.DataTable .FilterData{
+  border: 1px solid #8f8989;
+  border-radius: 3px;
+  padding: 5px;
+}
+.pagination{
+  display: flex;
+  justify-content: flex-end;
+}
+.pagination .inner-pagination{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+}
+.pagination .inner-pagination button{
+    padding: 5px 7px;
+    border: 1px solid #3ca2da;
+    border-radius: 3px;
+    background-color: #3ca2da;
+    color: #fff;
+}
+.thead-display{
+  display:flex;
 }

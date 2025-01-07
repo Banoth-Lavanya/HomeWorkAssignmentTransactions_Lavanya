@@ -1,0 +1,173 @@
+{
+    "Transactions":[
+    {
+        "transaction_id": "TXN001",
+        "customer_name": "Lavanya",
+        "customer_id": "C00001",
+        "purchased_product": "Tablet",
+        "price": "379.51",
+        "purchased_date": "2024-09-14"
+    },
+    {
+        "transaction_id": "TXN002",
+        "customer_name": "Sudheer",
+        "customer_id": "C00002",
+        "purchased_product": "Samsung m31",
+        "price": "703.15",
+        "purchased_date": "2024-03-24"
+    },
+    {
+        "transaction_id": "TXN003",
+        "customer_name": "Aishwarya",
+        "customer_id": "C00003",
+        "purchased_product": "Laptop Hp",
+        "price": "974.24",
+        "purchased_date": "2024-02-06"
+    },
+    {
+        "transaction_id": "TXN004",
+        "customer_name": "Aradhya",
+        "customer_id": "C00004",
+        "purchased_product": "Samsung m32",
+        "price": "31.53",
+        "purchased_date": "2024-03-22"
+    },
+    {
+        "transaction_id": "TXN005",
+        "customer_name": "Anusha",
+        "customer_id": "C00005",
+        "purchased_product": "Moto G5",
+        "price": "212.51",
+        "purchased_date": "2024-10-21"
+    },
+    {
+        "transaction_id": "TXN006",
+        "customer_name": "MuthuLakshmi",
+        "customer_id": "C00006",
+        "purchased_product": "Dell Laptop",
+        "price": "316.49",
+        "purchased_date": "2024-10-20"
+    },
+    {
+        "transaction_id": "TXN007",
+        "customer_name": "Tannu Kumari",
+        "customer_id": "C00007",
+        "purchased_product": "Macbook Pro",
+        "price": "212.87",
+        "purchased_date": "2024-08-19"
+    },
+    {
+        "transaction_id": "TXN008",
+        "customer_name": "Suresh",
+        "customer_id": "C00008",
+        "purchased_product": "SmartWatch readmi",
+        "price": "930.24",
+        "purchased_date": "2024-12-09"
+    },
+    {
+        "transaction_id": "TXN009",
+        "customer_name": "Sai",
+        "customer_id": "C00009",
+        "purchased_product": "Hp Laptop icore3",
+        "price": "706.17",
+        "purchased_date": "2024-09-10"
+    },
+    {
+        "transaction_id": "TXN010",
+        "customer_name": "Ganesh",
+        "customer_id": "C00010",
+        "purchased_product": "Television LG",
+        "price": "125.31",
+        "purchased_date": "2024-08-22"
+    },
+    {
+        "transaction_id": "TXN011",
+        "customer_name": "Saritha",
+        "customer_id": "C00011",
+        "purchased_product": "Radio",
+        "price": "692.16",
+        "purchased_date": "2024-09-14"
+    },
+    {
+        "transaction_id": "TXN012",
+        "customer_name": "Jhonson",
+        "customer_id": "C00012",
+        "purchased_product": "Microphone",
+        "price": "698.52",
+        "purchased_date": "2024-04-18"
+    },
+    {
+        "transaction_id": "TXN013",
+        "customer_name": "Sai Suresh",
+        "customer_id": "C00013",
+        "purchased_product": "Lenovo Laptop core i5",
+        "price": "803.28",
+        "purchased_date": "2024-03-05"
+    },
+    
+    {
+        "transaction_id": "TXN014",
+        "customer_name": "Lakshmi",
+        "customer_id": "C00014",
+        "purchased_product": "Vivo V6",
+        "price": "172.09",
+        "purchased_date": "2024-12-23"
+    },
+    {
+        "transaction_id": "TXN015",
+        "customer_name": "Lakshmi",
+        "customer_id": "C00015",
+        "purchased_product": "Chairs",
+        "price": "214.56",
+        "purchased_date": "2023-09-12"
+    },
+    {
+        "transaction_id": "TXN016",
+        "customer_name": "Maha Lakshmi",
+        "customer_id": "C00016",
+        "purchased_product": "Window Curtains",
+        "price": "100.56",
+        "purchased_date": "2025-01-01"
+    },
+    {
+        "transaction_id": "TXN017",
+        "customer_name": "Anuradha",
+        "customer_id": "C00017",
+        "purchased_product": "Glasses",
+        "price": "114",
+        "purchased_date": "2024-10-20"
+    },
+    {
+        "transaction_id": "TXN018",
+        "customer_name": "Anuradha",
+        "customer_id": "C00017",
+        "purchased_product": "Bags",
+        "price": "500.09",
+        "purchased_date": "2024-11-22"
+    },
+    {
+        "transaction_id": "TXN019",
+        "customer_name": "Anurag",
+        "customer_id": "C00018",
+        "purchased_product": "Sweat Shirt",
+        "price": "300",
+        "purchased_date": "2022-05-02"
+    },
+    {
+        "transaction_id": "TXN020",
+        "customer_name": "Mahathi",
+        "customer_id": "C00019",
+        "purchased_product": "Kurti Set",
+        "price": "160.2",
+        "purchased_date": "2025-01-07"
+    },
+    {
+        "transaction_id": "TXN021",
+        "customer_name": "Mrudula",
+        "customer_id": "C00020",
+        "purchased_product": "Plazzo and Kurta set",
+        "price": "700",
+        "purchased_date": "2024-12-02"
+    }
+]
+}
