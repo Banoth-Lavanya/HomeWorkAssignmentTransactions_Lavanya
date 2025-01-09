@@ -1,10 +1,24 @@
-export const calculateRewardPoints = (price) => {
-    price = Math.floor(price ?? 0);
+/**
+ * Calculates reward points based on the price.
+ *
+ * @param {number|string} price - The price of the product.
+ * @returns {number} The calculated reward points.
+ */
+
+export const calculateRewardPoints = (price = 0) => {
+    price = Math.floor(price);
     let points = 0;
     points += price > 100 ? (price - 100) * 2 : 0;
     points += price > 50 ? (Math.min(price, 100) - 50) * 1 : 0;
     return points;
 };
+
+/**
+ * Gets the latest purchase date from a list of transactions.
+ *
+ * @param {Array} transactions - The list of transactions.
+ * @returns {Date} The latest purchase date.
+ */
 
 const getLatestDate = (transactions) => {
     return transactions.reduce((latest, transaction) => {
@@ -12,6 +26,13 @@ const getLatestDate = (transactions) => {
         return curreDate > latest ? curreDate : latest;
     }, new Date(transactions[0].purchased_date));
 };
+
+/**
+ * Sorts transactions by date and filters transactions within the last three months.
+ *
+ * @param {Array} transactions - The list of transactions.
+ * @returns {Array} The sorted and filtered list of transactions.
+ */
 
 export const sortByDate = (transactions) => {
     const latestDate = getLatestDate(transactions);
@@ -23,6 +44,13 @@ export const sortByDate = (transactions) => {
     const sortedTransactions = filteredTransactions.sort((a, b) => new Date(b.purchased_date) - new Date(a.purchased_date));
     return sortedTransactions;
 };
+
+/**
+ * Aggregates reward points from a list of transactions.
+ *
+ * @param {Array} transactions - The list of transactions.
+ * @returns {Object} An object containing transactions with reward points, monthly points, and total points.
+ */
 
 export const aggregatePoints = (transactions) => {
     const transactionsWithRewardpts= transactions.map(transaction => ({

@@ -1,13 +1,31 @@
 import React, { useState, useMemo } from 'react';
 import '../App.css';
 import { Sort } from '@mui/icons-material';
+import PropTypes from 'prop-types';
+import { ITEMS_PER_PAGE, SORT_CONFIG, CURRENT_PAGE,FILTER_PLACEHOLDER } from '../config/constants';
 import { sortData, filterData, paginateData } from '../utils/SortFilterPagination';
 
+
+/**
+ * UserMonthlyRewards displays a list of users,their reward points based on the Price of last 3 months Transactions.
+ *
+ * @component
+ * @example
+ * const monthlyPoints = [
+ *   {
+ *     customer_name: "Lavanya",
+ *     reward_points: 100
+ *   },
+ *   // more monthlyPoints
+ * ];
+ * return <UserMonthlyRewards monthlyPoints={monthlyPoints} />;
+ */
+
 const UserMonthlyRewards = ({ monthlyPoints }) => {
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
+  const [sortConfig, setSortConfig] = useState(SORT_CONFIG);
   const [filter, setFilter] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(15);
+  const [currentPage, setCurrentPage] = useState(CURRENT_PAGE);
+  const [itemsPerPage] = useState(ITEMS_PER_PAGE);
 
   const sortedMonthlyPoints = useMemo(() => sortData(monthlyPoints, sortConfig), [monthlyPoints, sortConfig]);
   const filteredMonthlyPoints = useMemo(() => filterData(sortedMonthlyPoints, filter), [sortedMonthlyPoints, filter]);
@@ -33,7 +51,7 @@ const UserMonthlyRewards = ({ monthlyPoints }) => {
     <div className='DataTable'>
       <input
         type="text"
-        placeholder="Filter"
+        placeholder={FILTER_PLACEHOLDER}
         value={filter}
         className='FilterData'
         onChange={e => setFilter(e.target.value)}
@@ -70,4 +88,20 @@ const UserMonthlyRewards = ({ monthlyPoints }) => {
     </div>
   );
 };
+
+UserMonthlyRewards.propTypes = {
+  monthlyPoints: PropTypes.arrayOf(
+    PropTypes.shape({
+      customer_id: PropTypes.string.isRequired,
+      customer_name: PropTypes.string.isRequired,
+      year: PropTypes.number.isRequired,
+      month:PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ]).isRequired,
+      reward_points: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+};
+
 export default UserMonthlyRewards;

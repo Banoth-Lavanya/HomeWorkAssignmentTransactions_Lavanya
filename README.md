@@ -8,3 +8,19 @@
 # ModuleDrvers/Driver.jsx is used to Render the all components and it can be rendered in App.jsx in order avoid nested components import and to make it Pure.
 # Logs folder contains logger.js whcih will create logs upon fetch of data.
 # data.json contains Transactions Data which is inside a public folder.
+#Find the screenshots below
+
+  1. Calculation of reward points
+    ![alt text](public/assets/Screenshots/CalculateRewardPoints.png)
+
+ 2. User Monthly reward points
+    ![public/assets/Screenshots/Monthlyrewards1.png](public/assets/Screenshots/Monthlyrewards1.png)
+    ![alt text](public/assets/Screenshots/MonthlyRewards2.png)
+
+ 3. Total Rewards
+   ![ public/assets/Screenshots/TotalRewards1.png](public/assets/Screenshots/TotalRewards1.png)
+   ![ public/assets/Screenshots/TotalRewards2.png](public/assets/Screenshots/TotalRewards2.png)
+
+ 4. Transactions
+    ![public/assets/Screenshots/Transactions1.png](public/assets/Screenshots/Transactions1.png)
+    ![public/assets/Screenshots/Transactions2.png](public/assets/Screenshots/Transactions2.png)

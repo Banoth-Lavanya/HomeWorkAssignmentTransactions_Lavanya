@@ -1,13 +1,31 @@
 import React, { useState, useMemo } from 'react';
 import '../App.css';
 import { Sort } from '@mui/icons-material';
+import PropTypes from "prop-types";
+import { ITEMS_PER_PAGE, SORT_CONFIG, CURRENT_PAGE } from '../config/constants';
 import { sortData, filterData, paginateData } from '../utils/SortFilterPagination';
 
+
+/**
+ * totalPoints displays a list of users and their reward points based on the Price.
+ *
+ * @component
+ * @example
+ * const totalPoints = [
+ *   {
+ *     customer_name: "Lavanya",
+ *     reward_points: 100
+ *   },
+ *   // more Total rewards
+ * ];
+ * return <TotalsRewards totalPoints={totalPoints} />;
+ */
+
 const TotalRewards = ({ totalPoints }) => {
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
+  const [sortConfig, setSortConfig] = useState(SORT_CONFIG);
   const [filter, setFilter] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(15);
+  const [currentPage, setCurrentPage] = useState(CURRENT_PAGE);
+  const [itemsPerPage] = useState(ITEMS_PER_PAGE);
 
   const sortedTotalPoints = useMemo(() => sortData(totalPoints, sortConfig), [totalPoints, sortConfig]);
   const filteredTotalPoints = useMemo(() => filterData(sortedTotalPoints, filter), [sortedTotalPoints, filter]);
@@ -62,6 +80,15 @@ const TotalRewards = ({ totalPoints }) => {
       </div>
     </div>
   );
+};
+
+TotalRewards.propTypes = {
+  totalPoints: PropTypes.arrayOf(
+    PropTypes.shape({
+      customer_name: PropTypes.string.isRequired,
+      reward_points: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default TotalRewards;

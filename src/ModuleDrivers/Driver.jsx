@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { fetchData } from "../Services/FecthData";
+import PropTypes from 'prop-types';
+import { fetchData } from "../Services/FetchData";
 import { aggregatePoints } from '../utils/calculateRewardPoints';
 import UserMonthlyRewards from "../components/UserMonthlyRewards";
 import TotalRewards from "../components/TotalRewards";
 import Transactions from "../components/Transactions";
+
+
+/**
+ * Driver component fetches transaction data, calculates reward points, and displays them in different tabs.
+ *
+ * @component
+ * @example
+ * return <Driver />;
+ */
 
 const Driver = () => {
   const [pointsData, setPointsData] = useState({ transactions: [],monthlyPoints: [], totalPoints: [] });
@@ -60,5 +70,30 @@ const Driver = () => {
     </div>
   );
 }
+
+Driver.propTypes = {
+  pointsData: PropTypes.shape({
+    transactions: PropTypes.arrayOf(
+      PropTypes.shape({
+        transaction_id: PropTypes.string.isRequired,
+        customer_name: PropTypes.string.isRequired,
+        customer_id: PropTypes.string.isRequired,
+        purchased_product: PropTypes.string.isRequired,
+        price: PropTypes.oneOfType([
+          PropTypes.string,
+          PropTypes.number
+        ]).isRequired,
+        purchased_date: PropTypes.string.isRequired,
+        reward_points: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+    monthlyPoints: PropTypes.arrayOf(PropTypes.object).isRequired,
+    totalPoints: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }).isRequired,
+  activeTab: PropTypes.string.isRequired,
+  error: PropTypes.string,
+  loading: PropTypes.bool.isRequired,
+  handleTabChange: PropTypes.func.isRequired,
+};
 
 export default Driver;
