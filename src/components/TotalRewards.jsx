@@ -47,26 +47,28 @@ const TotalRewards = ({ totalPoints }) => {
     setCurrentPage(prevPage => Math.min(prevPage + 1, totalPages));
   };
   return (
-    <div className='DataTable'>
-      <input
-        type="text"
-        placeholder="Filter"
-        value={filter}
-        className='FilterData'
-        onChange={e => setFilter(e.target.value)}
-      />
-      <table>
+    <div className='DataTable totalRewardsTable'>
+      <div className="filterInput">
+          <input
+          type="text"
+          placeholder="Filter"
+          value={filter}
+          className='FilterData'
+          onChange={e => setFilter(e.target.value)}
+        />
+        </div>
+      <table className='equal-width-table centerAlign'>
         <thead>
           <tr>
           <th><div className='thead-display'>Customer Name<span onClick={() => requestSort('customer_name')}><Sort/></span></div></th>
-          <th><div className='thead-display'>Reward Points<span onClick={() => requestSort('reward_points')}><Sort/></span></div></th>
+          <th className='rightAlign'><div className='thead-display'>Reward Points<span onClick={() => requestSort('reward_points')}><Sort/></span></div></th>
           </tr>
         </thead>
         <tbody>
           {currentItems.map((item, index) => (
             <tr key={index}>
               <td>{item.name}</td>
-              <td>{item.reward_points}</td>
+              <td className='rightAlign'>{item.reward_points}</td>
             </tr>
           ))}
         </tbody>

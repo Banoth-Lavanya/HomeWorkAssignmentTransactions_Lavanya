@@ -6,10 +6,8 @@ import UserMonthlyRewards from "../components/UserMonthlyRewards";
 import TotalRewards from "../components/TotalRewards";
 import Transactions from "../components/Transactions";
 
-
 /**
  * Driver component fetches transaction data, calculates reward points, and displays them in different tabs.
- *
  * @component
  * @example
  * return <Driver />;

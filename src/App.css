@@ -56,7 +56,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
-  font-size: 18px;
+  font-size: 15px;
   text-align: left;
 }
 
@@ -68,8 +68,6 @@ th, td {
 th {
   background-color: #3ca2da;
   color: #fff;
- 
-  /* background-color: #f2f2f2; */
 }
 
 tr:nth-child(even) {
@@ -127,4 +125,79 @@ tr:hover {
 }
 .thead-display{
   display:flex;
+  justify-content:center;
+}
+.centerAlign{
+  text-align:center;
+}
+.rightAlign{
+  text-align:right;
+}
+.rightAlign .thead-display{
+  justify-content: flex-end;
+}
+.equal-width-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.equal-width-table th, .equal-width-table td {
+  width: 33.33%;
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+}
+.totalRewardsTable{
+  width:55%;
+  margin : 0 auto;
+}
+.totalRewardsTable .equal-width-table{
+  width:100%;
+  margin: 10px auto;
+}
+.totalRewardsTable .equal-width-table th, .totalRewardsTable .equal-width-table td {
+  border: 1px solid #ddd;
+}
+.totalRewardsTable .equal-width-table .filterInput{
+  margin-top: 18px;
+}
+input:focus{
+  outline:none;
+  border: 1px solid #ddd;
+}
+@media only screen and (max-width: 768px) {
+  .totalRewardsTable{
+    width: 100%;
+    
+  }
+  .equal-width-table{
+    font-size:15px;
+  }
+  .DataTable{
+    margin-top:15px;
+  }
+  .css-1umw9bq-MuiSvgIcon-root{
+    width:15px!important;
+    height:15px!important;
+  }
+  .tabs button,.inner-pagination{
+    font-size:13px;
+  }
+  .equal-width-table th, .equal-width-table td {
+    border: 1px solid #ddd;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .thead-display,.equal-width-table{
+    font-size: 8px;
+  }
+  .css-1umw9bq-MuiSvgIcon-root{
+    width:10px!important;
+    height:10px!important;
+  }
+
+}
+@media only screen and (max-width: 350px) {
+  .thead-display,.equal-width-table{
+    font-size: 6px;
+  }
 }
