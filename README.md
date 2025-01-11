@@ -28,6 +28,7 @@
     ![alt text](public/assets/Screenshots/Transactions3.png)
 
 #Mobile Screens:
+
    1.UserMonthlyRewards
      ![alt text](public/assets/Screenshots/monthlyRewardsMobile1.png)
      ![alt text](public/assets/Screenshots/monthlyRewardsMobile2.png)
