@@ -80,9 +80,9 @@ const Transactions = ({ transactions }) => {
         <thead>
           <tr>
           <th><div className='thead-display'><span>Transaction ID</span><span onClick={() => requestSort('transaction_id')}><Sort/></span></div></th>
-          <th><div className='thead-display'><span>Customer Name</span><span onClick={() => requestSort('customer_name')}><Sort/></span></div></th>
           <th><div className='thead-display'><span>Customer ID</span><span onClick={() => requestSort('customer_id')}><Sort/></span></div></th>
-           <th><div className='thead-display'><span>Purchased Product</span><span onClick={() => requestSort('purchased_product')}><Sort/></span></div></th>
+          <th><div className='thead-display'><span>Customer Name</span><span onClick={() => requestSort('customer_name')}><Sort/></span></div></th>
+          <th><div className='thead-display'><span>Purchased Product</span><span onClick={() => requestSort('purchased_product')}><Sort/></span></div></th>
            <th><div className='thead-display'><span>Purchased Date</span><span onClick={() => requestSort('purchased_date')}><Sort/></span></div></th>
            <th className='rightAlign'><div className='thead-display'><span>Price</span><span onClick={() => requestSort('price')}><Sort/></span></div></th>
           <th className='rightAlign'><div className='thead-display'><span>Reward Points</span><span onClick={() => requestSort('reward_points')}><Sort/></span></div></th>
@@ -92,7 +92,7 @@ const Transactions = ({ transactions }) => {
           {currentItems.map((item, index) => (
             <tr key={index}>
                <td>{item.transaction_id}</td>
-              <td>{item.customer_id}</td>
+               <td>{item.customer_id}</td>
               <td>{item.customer_name}</td>
               <td>{item.purchased_product}</td>
               <td>{formatDate(item.purchased_date)}</td>

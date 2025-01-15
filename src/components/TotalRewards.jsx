@@ -60,7 +60,7 @@ const TotalRewards = ({ totalPoints }) => {
       <table className='equal-width-table centerAlign'>
         <thead>
           <tr>
-          <th><div className='thead-display'>Customer Name<span onClick={() => requestSort('customer_name')}><Sort/></span></div></th>
+          <th><div className='thead-display'>Customer Name<span onClick={() => requestSort('name')}><Sort/></span></div></th>
           <th className='rightAlign'><div className='thead-display'>Reward Points<span onClick={() => requestSort('reward_points')}><Sort/></span></div></th>
           </tr>
         </thead>
