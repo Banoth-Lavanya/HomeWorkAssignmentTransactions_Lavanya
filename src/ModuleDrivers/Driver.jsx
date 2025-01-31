@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { fetchData } from "../Services/FetchData";
 import { aggregatePoints } from '../utils/calculateRewardPoints';
 import UserMonthlyRewards from "../components/UserMonthlyRewards";
 import TotalRewards from "../components/TotalRewards";
 import Transactions from "../components/Transactions";
+import { monthlyRewardsTab , totalRewardsTab, transactionsTab } from "../config/constants";
 
 /**
  * Driver component fetches transaction data, calculates reward points, and displays them in different tabs.
@@ -16,8 +16,8 @@ import Transactions from "../components/Transactions";
 const Driver = () => {
   const [pointsData, setPointsData] = useState({ transactions: [],monthlyPoints: [], totalPoints: [] });
   const [activeTab, setActiveTab] = useState('monthlyRewards');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [Fetcherror, setFetchError] = useState('');
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     const getData = async () => {
@@ -25,9 +25,9 @@ const Driver = () => {
         const transactions = await fetchData();
         const aggregatedPoints = aggregatePoints(transactions.Transactions);
         setPointsData(aggregatedPoints);
-        setError("");
+        setFetchError("");
       } catch (error) {
-        setError("Error fetching data");
+        setFetchError(new Error("Error Fetching Data"));
       } finally {
         setLoading(false);
       }
@@ -38,8 +38,12 @@ const Driver = () => {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setLoading(false);
   };
+  const tabs = [
+    { label: 'Monthly Rewards', value: monthlyRewardsTab, component: UserMonthlyRewards, dataKey: 'monthlyPoints' },
+    { label: 'Total Rewards', value: totalRewardsTab, component: TotalRewards, dataKey: 'totalPoints' },
+    { label: 'Transactions', value: transactionsTab, component: Transactions, dataKey: 'transactions' },
+  ];
 
   return (
     <div>
@@ -50,48 +54,33 @@ const Driver = () => {
         </p>
       </header>
       <div className="tabs">
-        <button className={activeTab === 'monthlyRewards' ? 'active' : ''} onClick={() => handleTabChange('monthlyRewards')}>Monthly Rewards</button>
-        <button className={activeTab === 'totalRewards' ? 'active' : ''} onClick={() => handleTabChange('totalRewards')}>Total Rewards</button>
-        <button className={activeTab === 'transactions' ? 'active' : ''} onClick={() => handleTabChange('transactions')}>Transactions</button>
+      {tabs.map((tab) => (
+          <button
+            key={tab.value}
+            className={activeTab === tab.value ? 'active' : ''}
+            onClick={() => handleTabChange(tab.value)}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
       {loading ? (
         <div>Loading...</div>
-      ) : error ? (
-        <div>{error}</div>
+      ) : Fetcherror ? (
+        <div>{Fetcherror.message}</div>
       ) : (
         <div className="tab-content">
-          {pointsData.monthlyPoints && activeTab === 'monthlyRewards' && <UserMonthlyRewards monthlyPoints={pointsData.monthlyPoints} />}
-          {pointsData.totalPoints && activeTab === 'totalRewards' && <TotalRewards totalPoints={pointsData.totalPoints} />}
-          {pointsData.transactions && activeTab === 'transactions' && <Transactions transactions={pointsData.transactions} />}
+           {tabs.map((tab) => {
+            const Component = tab.component;
+            return activeTab === tab.value && pointsData[tab.dataKey] ? (
+              <Component key={tab.value} {...{ [tab.dataKey]: pointsData[tab.dataKey] }} />
+            ) : null;
+          })}
         </div>
       )}
     </div>
   );
 }
 
-Driver.propTypes = {
-  pointsData: PropTypes.shape({
-    transactions: PropTypes.arrayOf(
-      PropTypes.shape({
-        transaction_id: PropTypes.string.isRequired,
-        customer_name: PropTypes.string.isRequired,
-        customer_id: PropTypes.string.isRequired,
-        purchased_product: PropTypes.string.isRequired,
-        price: PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number
-        ]).isRequired,
-        purchased_date: PropTypes.string.isRequired,
-        reward_points: PropTypes.number.isRequired,
-      })
-    ).isRequired,
-    monthlyPoints: PropTypes.arrayOf(PropTypes.object).isRequired,
-    totalPoints: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
-  activeTab: PropTypes.string.isRequired,
-  error: PropTypes.string,
-  loading: PropTypes.bool.isRequired,
-  handleTabChange: PropTypes.func.isRequired,
-};
 
 export default Driver;

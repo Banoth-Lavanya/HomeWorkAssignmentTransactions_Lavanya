@@ -30,7 +30,6 @@ const TotalRewards = ({ totalPoints }) => {
   const sortedTotalPoints = useMemo(() => sortData(totalPoints, sortConfig), [totalPoints, sortConfig]);
   const filteredTotalPoints = useMemo(() => filterData(sortedTotalPoints, filter), [sortedTotalPoints, filter]);
   const { currentItems, totalPages } = useMemo(() => paginateData(filteredTotalPoints, currentPage, itemsPerPage), [filteredTotalPoints, currentPage, itemsPerPage]);
-
   const requestSort = key => {
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
@@ -92,5 +91,6 @@ TotalRewards.propTypes = {
     })
   ).isRequired,
 };
+
 
 export default TotalRewards;

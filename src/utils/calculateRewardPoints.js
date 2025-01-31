@@ -60,29 +60,30 @@ export const aggregatePoints = (transactions) => {
        reward_points: calculateRewardPoints(parseFloat(transaction.price))
     }));
     const recentTransactions = filterAndSortTransactionsByLastThreeMonths(transactionsWithRewardpts, lastThreeMonths);
-    const { pointsByCustomer } = recentTransactions.reduce((acc, { customer_id, customer_name, purchased_date, reward_points }) => {
-    const month = new Date(purchased_date).getMonth() + 1;
-    const year = new Date(purchased_date).getFullYear();
-    const key = `${customer_id}-${year}-${month}`;
-       
-        if (!acc.pointsByCustomer[key]) {
-            acc.pointsByCustomer[key] = { customer_id: customer_id, name: customer_name, year, month, reward_points: 0 };
+    const pointsByCustomer = recentTransactions.reduce((acc, { customer_id, customer_name, purchased_date, reward_points }) => {
+        const month = new Date(purchased_date).getMonth() + 1;
+        const year = new Date(purchased_date).getFullYear();
+        const key = `${customer_id}-${year}-${month}`;
+           
+        if (!acc[key]) {
+            acc[key] = { customer_id: customer_id, name: customer_name, year, month, reward_points: 0 };
         }
-        acc.pointsByCustomer[key].reward_points += reward_points;
+        acc[key].reward_points += reward_points;
         return acc;
-    }, { pointsByCustomer: {}});
+    }, {});
+
     const filteredPointsByCustomer = Object.fromEntries(
         Object.entries(pointsByCustomer).filter(([key, value]) => value.reward_points !== 0)
     );
    
-    const { totalPointsByCustomer } = transactionsWithRewardpts.reduce((acc, { customer_id, customer_name, reward_points }) => {
-        if (!acc.totalPointsByCustomer[customer_id]) {
-            acc.totalPointsByCustomer[customer_id] = { name: customer_name, reward_points: 0 };
+    const totalPointsByCustomer = transactionsWithRewardpts.reduce((acc, { customer_id, customer_name, reward_points }) => {
+        if (!acc[customer_id]) {
+            acc[customer_id] = { name: customer_name, reward_points: 0 };
         }
-        acc.totalPointsByCustomer[customer_id].reward_points += reward_points;
-
+        acc[customer_id].reward_points += reward_points;
+    
         return acc;
-    }, { totalPointsByCustomer: {} });
+    }, {});
 
     return {
         transactions: transactionsWithRewardpts,

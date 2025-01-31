@@ -25,6 +25,21 @@ import { format } from 'date-fns';
  * ];
  * return <Transactions transactions={transactions} />;
  */
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const suffix = (day) => {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1: return "st";
+      case 2: return "nd";
+      case 3: return "rd";
+      default: return "th";
+    }
+  };
+
+  return format(date, `d'${suffix(day)}' MMM, yyyy`);
+};
 
 const Transactions = ({ transactions }) => {
 
@@ -44,21 +59,7 @@ const Transactions = ({ transactions }) => {
     }
     setSortConfig({ key, direction });
   };
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const suffix = (day) => {
-        if (day > 3 && day < 21) return 'th';
-        switch (day % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
-        }
-    };
 
-    return format(date, `d'${suffix(day)}' MMM, yyyy`);
-}
   const handlePrevPage = () => {
     setCurrentPage(prevPage => Math.max(prevPage - 1, 1));
   };
@@ -90,13 +91,13 @@ const Transactions = ({ transactions }) => {
         </thead>
         <tbody>
           {currentItems.map((item, index) => (
-            <tr key={index}>
+            <tr key={item.transaction_id}>
                <td>{item.transaction_id}</td>
                <td>{item.customer_id}</td>
               <td>{item.customer_name}</td>
               <td>{item.purchased_product}</td>
               <td>{formatDate(item.purchased_date)}</td>
-              <td className='rightAlign'>{item.price}</td>
+              <td className='rightAlign'>{parseFloat(item.price).toFixed(2)}</td>
               <td className='rightAlign'>{item.reward_points}</td>
             </tr>
           ))}

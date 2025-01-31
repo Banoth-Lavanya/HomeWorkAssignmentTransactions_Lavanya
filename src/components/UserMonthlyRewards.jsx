@@ -72,7 +72,7 @@ const UserMonthlyRewards = ({ monthlyPoints }) => {
         </thead>
         <tbody>
           {currentItems.map((item, index) => (
-            <tr key={index}>
+            <tr key={item.customer_id}>
               <td>{item.customer_id}</td>
               <td>{item.name}</td>
               <td>{item.year}</td>
@@ -106,6 +106,10 @@ UserMonthlyRewards.propTypes = {
       reward_points: PropTypes.number.isRequired,
     })
   ).isRequired,
+};
+
+UserMonthlyRewards.defaultProps = {
+  monthlyPoints: [{ customer_id: "Unknown", customer_name: "Unknown", year: 0, month: 0, reward_points: 0 }],
 };
 
 export default UserMonthlyRewards;
