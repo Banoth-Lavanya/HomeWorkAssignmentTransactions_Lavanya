@@ -28,6 +28,7 @@ const Driver = () => {
         setFetchError("");
       } catch (error) {
         setFetchError(new Error("Error Fetching Data"));
+        setLoading(true);
       } finally {
         setLoading(false);
       }
@@ -81,6 +82,4 @@ const Driver = () => {
     </div>
   );
 }
-
-
 export default Driver;
