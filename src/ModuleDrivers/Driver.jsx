@@ -65,19 +65,20 @@ const Driver = () => {
           </button>
         ))}
       </div>
-      {loading ? (
-        <div>Loading...</div>
-      ) : Fetcherror ? (
+      { Fetcherror ? (
         <div>{Fetcherror.message}</div>
       ) : (
-        <div className="tab-content">
+        loading ? (
+          <div>Loading...</div>
+        ) : 
+        (<div className="tab-content">
            {tabs.map((tab) => {
             const Component = tab.component;
             return activeTab === tab.value && pointsData[tab.dataKey] ? (
               <Component key={tab.value} {...{ [tab.dataKey]: pointsData[tab.dataKey] }} />
             ) : null;
           })}
-        </div>
+        </div>)
       )}
     </div>
   );
