@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { fetchData } from "../Services/FetchData";
 import { aggregatePoints } from '../utils/calculateRewardPoints';
 import UserMonthlyRewards from "../components/UserMonthlyRewards";
 import TotalRewards from "../components/TotalRewards";
 import Transactions from "../components/Transactions";
-import { monthlyRewardsTab , totalRewardsTab, transactionsTab } from "../config/constants";
+import { monthlyRewardsTab, totalRewardsTab, transactionsTab } from "../config/constants";
 
 /**
  * Driver component fetches transaction data, calculates reward points, and displays them in different tabs.
@@ -14,21 +14,21 @@ import { monthlyRewardsTab , totalRewardsTab, transactionsTab } from "../config/
  */
 
 const Driver = () => {
-  const [pointsData, setPointsData] = useState({ transactions: [],monthlyPoints: [], totalPoints: [] });
-  const [activeTab, setActiveTab] = useState('monthlyRewards');
-  const [Fetcherror, setFetchError] = useState('');
-  const [loading, setLoading] = useState(false);
-  
+  const [pointsData, setPointsData] = useState({ transactions: [], monthlyPoints: [], totalPoints: [] });
+  const [activeTab, setActiveTab] = useState(monthlyRewardsTab);
+  const [fetchError, setFetchError] = useState('');
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       try {
         const transactions = await fetchData();
         const aggregatedPoints = aggregatePoints(transactions.Transactions);
         setPointsData(aggregatedPoints);
-        setFetchError("");
+        setFetchError('');
       } catch (error) {
-        setFetchError(new Error("Error Fetching Data"));
-        setLoading(true);
+        setFetchError(new Error('Error Fetching Data'));
       } finally {
         setLoading(false);
       }
@@ -37,14 +37,11 @@ const Driver = () => {
     getData();
   }, []);
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
-  const tabs = [
+  const tabs = useMemo(() => [
     { label: 'Monthly Rewards', value: monthlyRewardsTab, component: UserMonthlyRewards, dataKey: 'monthlyPoints' },
     { label: 'Total Rewards', value: totalRewardsTab, component: TotalRewards, dataKey: 'totalPoints' },
     { label: 'Transactions', value: transactionsTab, component: Transactions, dataKey: 'transactions' },
-  ];
+  ], []);
 
   return (
     <div>
@@ -55,32 +52,32 @@ const Driver = () => {
         </p>
       </header>
       <div className="tabs">
-      {tabs.map((tab) => (
+        {tabs.map(({ label, value }) => (
           <button
-            key={tab.value}
-            className={activeTab === tab.value ? 'active' : ''}
-            onClick={() => handleTabChange(tab.value)}
+            key={value}
+            className={activeTab === value ? 'active' : ''}
+            onClick={() => setActiveTab(value)}
           >
-            {tab.label}
+            {label}
           </button>
         ))}
       </div>
-      { Fetcherror ? (
-        <div>{Fetcherror.message}</div>
+      {fetchError ? (
+        <div>{fetchError}</div>
       ) : (
         loading ? (
           <div>Loading...</div>
-        ) : 
-        (<div className="tab-content">
-           {tabs.map((tab) => {
-            const Component = tab.component;
-            return activeTab === tab.value && pointsData[tab.dataKey] ? (
-              <Component key={tab.value} {...{ [tab.dataKey]: pointsData[tab.dataKey] }} />
-            ) : null;
-          })}
+        ) :(
+        <div className="tab-content">
+          {tabs.map(({ value, component: Component, dataKey }) => (
+            activeTab === value && pointsData[dataKey] && (
+              <Component key={value} {...{ [dataKey]: pointsData[dataKey] }} />
+            )
+          ))}
         </div>)
       )}
     </div>
   );
-}
+};
+
 export default Driver;
